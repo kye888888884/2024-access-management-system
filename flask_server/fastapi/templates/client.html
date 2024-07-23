@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chat</title>
+  </head>
+  <body>
+    <h1>WebSocket Chat</h1>
+    <form action="" onsubmit="sendMessage(event)">
+      <input type="text" id="messageText" autocomplete="off" />
+      <button>Send</button>
+    </form>
+    <ul id="messages"></ul>
+    <script>
+      var ws = new WebSocket('ws://localhost:5999/ws')
+      const msg = new SpeechSynthesisUtterance()
+      
+      const name = {
+        19: '홍길동',
+        67: '김철수'
+      }
+      
+      ws.onmessage = function (event) {
+        console.log('Message received: ' + event.data)
+        var messages = document.getElementById('messages')
+        var message = document.createElement('li')
+        var content = document.createTextNode(event.data)
+        message.appendChild(content)
+        messages.appendChild(message)
+      
+        msg.lang = 'ko-KR'
+        msg.pitch = 1.5
+        msg.rate = 1
+        n = Number(event.data)
+        console.log(Number(event.data))
+        msg.text = name[n] + '님 어서오세요.'
+        console.log(msg.text)
+        msg.volume = 1
+      
+        window.speechSynthesis.speak(msg)
+      }
+      function sendMessage(event) {
+        var input = document.getElementById('messageText')
+        ws.send(input.value)
+        input.value = ''
+        event.preventDefault()
+      }
+    </script>
+  </body>
+</html>

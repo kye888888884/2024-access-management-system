@@ -1,0 +1,25 @@
+:root {
+    --main-color: #16a2ff;
+}
+
+* {
+    font-family: "Gothic A1", sans-serif;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: var(--main-color);
+    font-weight: 600;
+    font-size: 3rem;
+}
+
+h2 {
+    color: #aaa;
+    font-weight: 800;
+    font-size: 4rem;
+}
