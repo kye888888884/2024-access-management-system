@@ -13,6 +13,7 @@
     <script>
       var ws = new WebSocket('ws://localhost:5999/ws')
       const msg = new SpeechSynthesisUtterance()
+      const ul_msg = document.getElementById('messages')
       
       const name = {
         19: '홍길동',
@@ -37,6 +38,11 @@
         msg.volume = 1
       
         window.speechSynthesis.speak(msg)
+      
+        var message = document.createElement('li')
+        var content = document.createTextNode(msg.text)
+        message.appendChild(content)
+        ul_msg.appendChild(message)
       }
       function sendMessage(event) {
         var input = document.getElementById('messageText')
